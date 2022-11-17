@@ -54,14 +54,4 @@ export class RatingComponent implements OnInit {
         this.startFillPercentage = (this._fillPercentage - ((this.activeStarIndex + 1) * (100 / this._options.starsCount))) * this._options.starsCount;
     }
 
-    public setLastStarStyle(index: number) {
-        if (index === this.halfStarIndex) {
-            return {
-                'background-image': 'linear-gradient(to right, #f4b63f 50%, rgba(0,0,0,0) 0%)',
-                'background-size': '100%'
-            }
-        }
-        return {};
-    }
-
 }
