@@ -1,0 +1,10 @@
+<div class="rating-wrapper" (mouseleave)="onMouseLeave()">
+    <div class="stars-container">
+        <span class="star-item-wrapper" *ngFor="let item of starItems; let ind=index">
+            <span class="star-item" [class.active-star]="ind <= activeStarIndex" (mouseenter)="onStarHover(ind)">&#x2605;
+            </span>
+            <span class="star-item star-item-fill" *ngIf="halfStarIndex === ind" [style.width.%]="startFillPercentage">&#x2605;
+            </span>
+        </span>
+    </div>
+</div>

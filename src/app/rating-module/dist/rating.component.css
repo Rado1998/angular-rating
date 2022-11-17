@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.rating-wrapper {
+  width: 150px;
+  position: relative;
+  color: transparent;
+}
+.rating-wrapper .stars-container {
+  white-space: nowrap;
+}
+.rating-wrapper .star-item {
+  font-size: 30px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.rating-wrapper .star-item:before {
+  content: "☆";
+  position: absolute;
+  color: #bdbdbd;
+  z-index: -1;
+}
+.rating-wrapper .star-item:hover {
+  color: gold;
+}
+.rating-wrapper .active-star {
+  color: gold;
+}
