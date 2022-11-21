@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
 
 import { DEFAULT_RATING_OPTIONS } from './constants';
 import { IRatingOptions } from './models';
@@ -21,6 +21,7 @@ export class RatingComponent implements OnInit {
     @Input() set fillPercentage($event: number) {
         this._fillPercentage = $event;
     }
+    @Output('onRate') private _onRateEvent: EventEmitter<number> = new EventEmitter<number>();
     public isHovering: boolean = false;
     public starItems: number[] = [];
     public activeStarIndex!: number;
@@ -52,7 +53,7 @@ export class RatingComponent implements OnInit {
     }
 
     public onClickRating(rate: number): void {
-        console.log(rate, 'rate');
+        this._onRateEvent.emit(rate);
     }
 
     private _calculateStartIndexes(): void {
