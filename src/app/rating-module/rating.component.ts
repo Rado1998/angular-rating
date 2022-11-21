@@ -21,6 +21,7 @@ export class RatingComponent implements OnInit {
     @Input() set fillPercentage($event: number) {
         this._fillPercentage = $event;
     }
+    public isHovering: boolean = false;
     public starItems: number[] = [];
     public activeStarIndex!: number;
     public halfStarIndex!: number;
@@ -42,10 +43,16 @@ export class RatingComponent implements OnInit {
 
     public onStarHover(starIndex: number): void {
         this.activeStarIndex = starIndex;
+        this.isHovering = true;
     }
 
     public onMouseLeave(): void {
         this._calculateStartIndexes();
+        this.isHovering = false;
+    }
+
+    public onClickRating(rate: number): void {
+        console.log(rate, 'rate');
     }
 
     private _calculateStartIndexes(): void {
