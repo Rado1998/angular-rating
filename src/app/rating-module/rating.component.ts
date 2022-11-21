@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter, TemplateRef } from '@angular/core';
 
 import { DEFAULT_RATING_OPTIONS } from './constants';
 import { IRatingOptions } from './models';
@@ -21,6 +21,7 @@ export class RatingComponent implements OnInit {
     @Input() set fillPercentage($event: number) {
         this._fillPercentage = $event;
     }
+    @Input() public starTemplate!: TemplateRef<any>;
     @Output('onRate') private _onRateEvent: EventEmitter<number> = new EventEmitter<number>();
     public isHovering: boolean = false;
     public starItems: number[] = [];
