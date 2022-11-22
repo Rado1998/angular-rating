@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IRatingOptions } from 'ngx-stars-rating';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,12 @@ export class AppComponent {
 
   public rate: number = 4.5;
 
+  public ratingOptions: IRatingOptions = {
+    starsCount: 10,
+    hoverable: true,
+    clickable: true
+  }
+
 
   constructor() {
     setTimeout(() => {
@@ -19,14 +26,6 @@ export class AppComponent {
     setTimeout(() => {
       this.rate = 4.8;
     }, 6000);
-
-    setTimeout(() => {
-      this.rate = 0;
-    }, 9000);
-
-    setTimeout(() => {
-      this.rate = 0.7;
-    }, 11000);
   }
 
 

@@ -1,7 +1,7 @@
 <div class="rating-wrapper" (mouseleave)="onMouseLeave()">
     <div class="stars-container">
         <span class="star-item-wrapper" *ngFor="let item of starItems; let ind=index" (click)="onClickRating(ind)">
-            <span class="star-item" [class.active-star]="ind <= activeStarIndex" (mouseenter)="onStarHover(ind)">
+            <span class="star-item" [class.star-item-hoverable]="options.hoverable" [class.active-star]="ind <= activeStarIndex || ind<=hoveringStarIndex" (mouseenter)="onStarHover(ind)">
                 <ng-container *ngIf="!starTemplate;else starTemplateRef">
                     &#x2605;
                 </ng-container>
@@ -9,7 +9,7 @@
                 </ng-template>
             </span>
             <span class="star-item star-item-fill" *ngIf="halfStarIndex === ind && !isHovering"
-                [style.width.%]="startFillPercentage">
+                [style.width.%]="starFillPercentage">
                 <ng-container *ngIf="!starTemplate;else starTemplateRef">
                     &#x2605;
                 </ng-container>

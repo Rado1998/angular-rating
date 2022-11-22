@@ -13,7 +13,7 @@ export class RatingComponent implements OnInit {
     private _options: IRatingOptions;
     private _rate: number = 0;
     @Input() set options($event: IRatingOptions) {
-        if ($event) {
+        if (!$event) {
             return;
         }
         this._options = $event;
@@ -28,7 +28,12 @@ export class RatingComponent implements OnInit {
     public starItems: number[] = [];
     public activeStarIndex!: number;
     public halfStarIndex!: number;
-    public startFillPercentage!: number;
+    public starFillPercentage!: number;
+    public hoveringStarIndex!: number;
+
+    get options(): IRatingOptions {
+        return this._options;
+    }
 
     constructor() {
         this._options = DEFAULT_RATING_OPTIONS;
@@ -45,16 +50,25 @@ export class RatingComponent implements OnInit {
     }
 
     public onStarHover(starIndex: number): void {
-        this.activeStarIndex = starIndex;
+        if (!this._options.hoverable) {
+            return;
+        }
+        this.hoveringStarIndex = starIndex;
         this.isHovering = true;
     }
 
     public onMouseLeave(): void {
-        this._calculateStartIndexes();
+        if (!this._options.hoverable) {
+            return;
+        }
+        this.hoveringStarIndex = -1;
         this.isHovering = false;
     }
 
     public onClickRating(rateIndex: number): void {
+        if (!this._options.clickable) {
+            return;
+        }
         const rate: number = rateIndex + 1;
         this._onRateEvent.emit(rate);
     }
@@ -62,9 +76,9 @@ export class RatingComponent implements OnInit {
     private _calculateStartIndexes(): void {
         this.activeStarIndex = Math.floor(this._rate) - 1;
         this.halfStarIndex = Math.ceil(this._rate) - 1;
-        this.startFillPercentage = (this._rate - Math.floor(this._rate)) * 100;
-        if (this.startFillPercentage > 100) {
-            this.startFillPercentage = 100;
+        this.starFillPercentage = (this._rate - Math.floor(this._rate)) * 100;
+        if (this.starFillPercentage > 100) {
+            this.starFillPercentage = 100;
         }
     }
 
