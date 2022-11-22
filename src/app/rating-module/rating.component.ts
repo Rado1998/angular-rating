@@ -11,15 +11,16 @@ import { IRatingOptions } from './models';
 })
 export class RatingComponent implements OnInit {
     private _options: IRatingOptions;
-    private _fillPercentage: number = 50;
+    private _rate: number = 0;
     @Input() set options($event: IRatingOptions) {
         if ($event) {
             return;
         }
         this._options = $event;
     }
-    @Input() set fillPercentage($event: number) {
-        this._fillPercentage = $event;
+    @Input() set rate($event: number) {
+        this._rate = $event;
+        this._calculateStartIndexes();
     }
     @Input() public starTemplate!: TemplateRef<any>;
     @Output('onRate') private _onRateEvent: EventEmitter<number> = new EventEmitter<number>();
@@ -53,14 +54,18 @@ export class RatingComponent implements OnInit {
         this.isHovering = false;
     }
 
-    public onClickRating(rate: number): void {
+    public onClickRating(rateIndex: number): void {
+        const rate: number = rateIndex + 1;
         this._onRateEvent.emit(rate);
     }
 
     private _calculateStartIndexes(): void {
-        this.activeStarIndex = (Math.floor(this._options.starsCount * this._fillPercentage / 100)) - 1;
-        this.halfStarIndex = (Math.ceil(this._options.starsCount * this._fillPercentage / 100)) - 1;
-        this.startFillPercentage = (this._fillPercentage - ((this.activeStarIndex + 1) * (100 / this._options.starsCount))) * this._options.starsCount;
+        this.activeStarIndex = Math.floor(this._rate) - 1;
+        this.halfStarIndex = Math.ceil(this._rate) - 1;
+        this.startFillPercentage = (this._rate - Math.floor(this._rate)) * 100;
+        if (this.startFillPercentage > 100) {
+            this.startFillPercentage = 100;
+        }
     }
 
 }

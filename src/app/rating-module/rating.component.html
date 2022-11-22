@@ -1,6 +1,6 @@
 <div class="rating-wrapper" (mouseleave)="onMouseLeave()">
     <div class="stars-container">
-        <span class="star-item-wrapper" *ngFor="let item of starItems; let ind=index" (click)="onClickRating(item)">
+        <span class="star-item-wrapper" *ngFor="let item of starItems; let ind=index" (click)="onClickRating(ind)">
             <span class="star-item" [class.active-star]="ind <= activeStarIndex" (mouseenter)="onStarHover(ind)">
                 <ng-container *ngIf="!starTemplate;else starTemplateRef">
                     &#x2605;
