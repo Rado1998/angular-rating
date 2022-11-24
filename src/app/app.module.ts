@@ -11,7 +11,8 @@ import { RatingModule } from './rating-module/rating.module';
   ],
   imports: [
     BrowserModule,
-    RatingModule
+    RatingModule,
+    NgxStarsRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
